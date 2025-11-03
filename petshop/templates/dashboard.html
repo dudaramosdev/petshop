@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard - Amigo Fiel</title>
+    <style>
+        body { font-family: Arial; background: #f0f4f8; text-align: center; }
+        .container { background: white; margin: 80px auto; width: 600px; padding: 40px; border-radius: 12px; box-shadow: 0 0 10px #bbb; }
+        a, form button { background: #007bff; color: white; padding: 10px 20px; margin: 10px; text-decoration: none; border-radius: 6px; border: none; }
+        a:hover, form button:hover { background: #0056b3; }
+        .logout { background: #dc3545; }
+        .logout:hover { background: #a71d2a; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Bem-vindo(a), {{ user.username }}!</h1>
+        <a href="{% url 'lista_clientes' %}">Clientes</a>
+        <a href="{% url 'lista_produtos' %}">Produtos</a>
+        <a href="{% url 'lista_vendas' %}">Vendas</a>
+        <form action="{% url 'logout' %}" method="POST">
+            {% csrf_token %}
+            <button class="logout" type="submit">Sair</button>
+        </form>
+    </div>
+</body>
+</html>

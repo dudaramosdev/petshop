@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Produtos - Amigo Fiel</title>
+    <style>
+        body { font-family: Arial; background: #f0f4f8; }
+        .container { width: 80%; margin: 50px auto; background: white; padding: 30px; border-radius: 10px; box-shadow: 0 0 10px #ccc; }
+        h1 { text-align: center; color: #007bff; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th, td { padding: 10px; text-align: center; border-bottom: 1px solid #ddd; }
+        th { background: #007bff; color: white; }
+        .low-stock { color: red; font-weight: bold; }
+        a, button { text-decoration: none; padding: 10px 15px; border-radius: 6px; color: white; background: #007bff; }
+        a:hover { background: #0056b3; }
+        .back { background: #6c757d; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Produtos</h1>
+        <a href="{% url 'cadastrar_produto' %}">+ Novo Produto</a>
+        <a href="{% url 'dashboard' %}" class="back">Voltar</a>
+
+        <table>
+            <tr>
+                <th>Nome</th>
+                <th>Preço</th>
+                <th>Quantidade</th>
+            </tr>
+            {% for produto in produtos %}
+            <tr {% if produto.estoque_baixo %}class="low-stock"{% endif %}>
+                <td>{{ produto.nome }}</td>
+                <td>R$ {{ produto.preco }}</td>
+                <td>
+                    {{ produto.quantidade }}
+                    {% if produto.estoque_baixo %}
+                        <span class="low-stock">(Baixo Estoque)</span>
+                    {% endif %}
+                </td>
+            </tr>
+            {% empty %}
+            <tr><td colspan="3">Nenhum produto cadastrado.</td></tr>
+            {% endfor %}
+        </table>
+    </div>
+</body>
+</html>

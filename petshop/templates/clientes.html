@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Clientes - Amigo Fiel</title>
+    <style>
+        body { font-family: Arial; background: #f0f4f8; }
+        .container { width: 80%; margin: 50px auto; background: white; padding: 30px; border-radius: 10px; box-shadow: 0 0 10px #ccc; }
+        h1 { text-align: center; color: #007bff; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th, td { padding: 10px; text-align: center; border-bottom: 1px solid #ddd; }
+        th { background: #007bff; color: white; }
+        a, button { text-decoration: none; padding: 10px 15px; border-radius: 6px; color: white; background: #007bff; }
+        a:hover { background: #0056b3; }
+        .back { background: #6c757d; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Clientes Cadastrados</h1>
+        <a href="{% url 'cadastrar_cliente' %}">+ Novo Cliente</a>
+        <a href="{% url 'dashboard' %}" class="back">Voltar</a>
+
+        <table>
+            <tr>
+                <th>Nome</th>
+                <th>Telefone</th>
+                <th>Email</th>
+            </tr>
+            {% for cliente in clientes %}
+            <tr>
+                <td>{{ cliente.nome }}</td>
+                <td>{{ cliente.telefone }}</td>
+                <td>{{ cliente.email }}</td>
+            </tr>
+            {% empty %}
+            <tr><td colspan="3">Nenhum cliente cadastrado.</td></tr>
+            {% endfor %}
+        </table>
+    </div>
+</body>
+</html>

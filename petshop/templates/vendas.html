@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Vendas - Amigo Fiel</title>
+    <style>
+        body { font-family: Arial; background: #f0f4f8; }
+        .container { width: 85%; margin: 50px auto; background: white; padding: 30px; border-radius: 10px; box-shadow: 0 0 10px #ccc; }
+        h1 { text-align: center; color: #007bff; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th, td { padding: 10px; text-align: center; border-bottom: 1px solid #ddd; }
+        th { background: #007bff; color: white; }
+        a { text-decoration: none; padding: 10px 15px; border-radius: 6px; color: white; background: #007bff; }
+        a:hover { background: #0056b3; }
+        .back { background: #6c757d; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Histórico de Vendas</h1>
+        <a href="{% url 'cadastrar_venda' %}">+ Registrar Venda</a>
+        <a href="{% url 'dashboard' %}" class="back">Voltar</a>
+
+        <table>
+            <tr>
+                <th>Cliente</th>
+                <th>Produto</th>
+                <th>Quantidade</th>
+                <th>Valor Total</th>
+                <th>Data</th>
+            </tr>
+            {% for venda in vendas %}
+            <tr>
+                <td>{{ venda.cliente.nome }}</td>
+                <td>{{ venda.produto.nome }}</td>
+                <td>{{ venda.quantidade }}</td>
+                <td>R$ {{ venda.valor_total }}</td>
+                <td>{{ venda.data_venda|date:"d/m/Y H:i" }}</td>
+            </tr>
+            {% empty %}
+            <tr><td colspan="5">Nenhuma venda registrada.</td></tr>
+            {% endfor %}
+        </table>
+    </div>
+</body>
+</html>
